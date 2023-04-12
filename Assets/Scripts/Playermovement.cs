@@ -20,7 +20,7 @@ public class Playermovement : MonoBehaviour
 
     Vector3 velocity;
 
-    public float gravity = -9.3f;
+    private float gravity = -9.3f;
 
     bool IsGrounded;
 
@@ -43,6 +43,7 @@ public class Playermovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
@@ -65,6 +66,6 @@ public class Playermovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         Player.Move(velocity * Time.deltaTime);
-        
+
     }
 }
