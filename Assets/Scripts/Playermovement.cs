@@ -43,7 +43,8 @@ public class Playermovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Run();
+
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
@@ -67,5 +68,17 @@ public class Playermovement : MonoBehaviour
 
         Player.Move(velocity * Time.deltaTime);
 
+    }
+
+    void Run()
+    {
+        if (Input.GetButton("Fire3"))
+        {
+            MoveSpeed = 30f;
+        }
+        if (Input.GetButtonUp("Fire3"))
+        {
+            MoveSpeed = 10f;
+        }
     }
 }
