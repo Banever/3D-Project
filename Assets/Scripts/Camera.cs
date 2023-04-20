@@ -1,6 +1,8 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class Camera : MonoBehaviour
 {
@@ -24,5 +26,6 @@ public class Camera : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         Player.Rotate(Vector3.up * mouseX);
+
     }
 }
