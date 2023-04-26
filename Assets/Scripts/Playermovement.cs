@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Playermovement : MonoBehaviour
 {
@@ -28,6 +30,13 @@ public class Playermovement : MonoBehaviour
 
     public GameObject BulletPreFab;
 
+    public bool Auto;
+
+    public Text AmmoDisplay;
+
+    public int Ammo;
+
+
     void Shoot()
     {
         Instantiate(BulletPreFab, Firepoint.position, Firepoint.rotation);
@@ -37,22 +46,25 @@ public class Playermovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GetComponent<CharacterController>();   
+        Player = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Run();
-
-        if (Input.GetButtonDown("Fire1"))
+        AmmoDisplay.text = Ammo.ToString();
+        if (Input.GetButtonUp("Fire1") && !Auto && Ammo > 0)
         {
             Shoot();
+            Ammo--;
         }
+
+        Automatic();
 
         IsGrounded = Physics.CheckSphere(groundcheck.position, groundDistance, groundmask);
 
-        if(IsGrounded && velocity.y < 0)
+        if (IsGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
@@ -79,6 +91,14 @@ public class Playermovement : MonoBehaviour
         if (Input.GetButtonUp("Fire3"))
         {
             MoveSpeed = 10f;
+        }
+    }
+    void Automatic()
+    {
+        if (Input.GetButton("Fire1") && Auto && Ammo > 0)
+        {
+            Shoot();
+            Ammo--;
         }
     }
 }
